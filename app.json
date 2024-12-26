@@ -4,7 +4,7 @@
     "slug": "doc-ai",
     "version": "1.0.0",
 
-    "scheme": "doc-ai",
+    "scheme": "doc.ai",
     "web": {
       "bundler": "metro",
       "output": "static",
