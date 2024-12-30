@@ -3,7 +3,9 @@ import { Link, Tabs } from 'expo-router';
 import { HeaderButton } from '../../components/HeaderButton';
 import { TabBarIcon } from '../../components/TabBarIcon';
 
-export default function TabLayout() {
+import { withAuth } from '~/hooks/hoc/withAuth';
+
+function TabLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -31,3 +33,5 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+export default withAuth(TabLayout);
