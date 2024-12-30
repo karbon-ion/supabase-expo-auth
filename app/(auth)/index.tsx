@@ -46,7 +46,7 @@ export default function LoginScreen() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'yourapp://auth/callback',
+          redirectTo: 'doc.ai://auth/callback',
         },
       });
 
@@ -61,7 +61,7 @@ export default function LoginScreen() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'twitter',
         options: {
-          redirectTo: 'yourapp://auth/callback',
+          redirectTo: 'doc.ai://auth/callback',
         },
       });
 
