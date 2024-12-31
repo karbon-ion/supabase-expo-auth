@@ -38,6 +38,12 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.mustafa_raja.docai"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f4c8b0d1-fef4-4825-81b2-0d65a90c2f82"
+      }
+    },
+    "owner": "mustafa_raja"
   }
 }

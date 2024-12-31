@@ -1,8 +1,6 @@
 import { Stack } from 'expo-router';
 
-export const unstable_settings = {
-  initialRouteName: 'index',
-};
+import { withNoAuth } from '~/hooks/hoc/withNoAuth';
 
 function AuthLayout() {
   return (
@@ -13,4 +11,4 @@ function AuthLayout() {
   );
 }
 
-export default AuthLayout;
+export default withNoAuth(AuthLayout);
