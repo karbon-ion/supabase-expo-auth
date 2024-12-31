@@ -1,5 +1,4 @@
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import * as AppleAuthentication from 'expo-apple-authentication';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -84,32 +83,6 @@ export default function RegisterScreen() {
 
       if (error) throw error;
     } catch (error: any) {
-      Alert.alert('Error', error.message);
-    }
-  };
-
-  const handleAppleRegister = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-
-      if (credential.identityToken) {
-        const { data, error } = await supabase.auth.signInWithIdToken({
-          provider: 'apple',
-          token: credential.identityToken,
-        });
-
-        if (error) throw error;
-      }
-    } catch (error: any) {
-      if (error.code === 'ERR_REQUEST_CANCELED') {
-        // Handle user cancellation
-        return;
-      }
       Alert.alert('Error', error.message);
     }
   };
@@ -228,16 +201,6 @@ export default function RegisterScreen() {
                 onPress={handleTwitterRegister}>
                 <FontAwesome name="twitter" size={20} color="#1DA1F2" />
               </TouchableOpacity>
-
-              {Platform.OS === 'ios' && (
-                <AppleAuthentication.AppleAuthenticationButton
-                  buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_UP}
-                  buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-                  cornerRadius={8}
-                  style={{ width: 44, height: 44 }}
-                  onPress={handleAppleRegister}
-                />
-              )}
             </View>
 
             <View className="mt-4 flex-row justify-center">
