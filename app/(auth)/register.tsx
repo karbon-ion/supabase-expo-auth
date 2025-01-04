@@ -63,36 +63,12 @@ export default function RegisterScreen() {
     }
   };
 
-  const handleGoogleRegister = async () => {
-    try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      });
-
-      if (error) throw error;
-    } catch (error: any) {
-      Alert.alert('Error', error.message);
-    }
-  };
-
-  const handleTwitterRegister = async () => {
-    try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'twitter',
-      });
-
-      if (error) throw error;
-    } catch (error: any) {
-      Alert.alert('Error', error.message);
-    }
-  };
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-white dark:bg-gray-950">
-      <ScrollView className="flex-1">
-        <View className="flex-1 px-6 py-12">
+      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="min-h-full flex-1 justify-center px-6 py-20">
           <View className="mb-8">
             <Text className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
               Create account
@@ -178,30 +154,16 @@ export default function RegisterScreen() {
             </View>
 
             <TouchableOpacity
-              className="mt-2 w-full rounded-lg bg-blue-600 py-3"
-              onPress={handleRegister}>
-              <Text className="text-center font-semibold text-white">Create account</Text>
+              className={`mt-2 w-full rounded-lg ${loading ? 'bg-blue-400' : 'bg-blue-600'} py-3`}
+              onPress={handleRegister}
+              disabled={loading}>
+              <View className="flex-row items-center justify-center space-x-2">
+                {loading && <FontAwesome name="spinner" size={20} color="white" className="animate-spin" />}
+                <Text className="text-center font-semibold text-white">
+                  {loading ? 'Creating account...' : 'Create account'}
+                </Text>
+              </View>
             </TouchableOpacity>
-
-            <View className="mt-6 flex-row items-center">
-              <View className="h-[1px] flex-1 bg-gray-200 dark:bg-gray-800" />
-              <Text className="mx-4 text-sm text-gray-500">or continue with</Text>
-              <View className="h-[1px] flex-1 bg-gray-200 dark:bg-gray-800" />
-            </View>
-
-            <View className="flex-row justify-center space-x-4">
-              <TouchableOpacity
-                className="flex-row items-center justify-center rounded-lg border border-gray-200 px-4 py-2.5 dark:border-gray-800"
-                onPress={handleGoogleRegister}>
-                <FontAwesome name="google" size={20} color="#EA4335" />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                className="flex-row items-center justify-center rounded-lg border border-gray-200 px-4 py-2.5 dark:border-gray-800"
-                onPress={handleTwitterRegister}>
-                <FontAwesome name="twitter" size={20} color="#1DA1F2" />
-              </TouchableOpacity>
-            </View>
 
             <View className="mt-4 flex-row justify-center">
               <Text className="text-sm text-gray-500 dark:text-gray-400">

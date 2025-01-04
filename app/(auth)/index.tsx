@@ -1,4 +1,4 @@
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -37,36 +37,6 @@ export default function LoginScreen() {
       Alert.alert('Error', error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: 'doc.ai://auth/callback',
-        },
-      });
-
-      if (error) throw error;
-    } catch (error) {
-      Alert.alert('Error', error instanceof Error ? error.message : 'An unexpected error occurred');
-    }
-  };
-
-  const handleTwitterLogin = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'twitter',
-        options: {
-          redirectTo: 'doc.ai://auth/callback',
-        },
-      });
-
-      if (error) throw error;
-    } catch (error) {
-      Alert.alert('Error', error instanceof Error ? error.message : 'An unexpected error occurred');
     }
   };
 
@@ -129,26 +99,6 @@ export default function LoginScreen() {
               {loading ? 'Signing in...' : 'Sign in'}
             </Text>
           </TouchableOpacity>
-
-          <View className="mt-6 flex-row items-center">
-            <View className="h-[1px] flex-1 bg-gray-200 dark:bg-gray-800" />
-            <Text className="mx-4 text-sm text-gray-500">or continue with</Text>
-            <View className="h-[1px] flex-1 bg-gray-200 dark:bg-gray-800" />
-          </View>
-
-          <View className="flex-row justify-center space-x-4">
-            <TouchableOpacity
-              className="flex-row items-center justify-center rounded-lg border border-gray-200 px-4 py-2.5 dark:border-gray-800"
-              onPress={handleGoogleLogin}>
-              <FontAwesome name="google" size={20} color="#EA4335" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              className="flex-row items-center justify-center rounded-lg border border-gray-200 px-4 py-2.5 dark:border-gray-800"
-              onPress={handleTwitterLogin}>
-              <FontAwesome name="twitter" size={20} color="#1DA1F2" />
-            </TouchableOpacity>
-          </View>
 
           <View className="mt-4 flex-row justify-center">
             <Text className="text-sm text-gray-500 dark:text-gray-400">
